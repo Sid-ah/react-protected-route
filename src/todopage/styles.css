@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans:400,500,700&subset=cyrillic,cyrillic-ext');
+@import url(https://fonts.googleapis.com/css?family=Quicksand:300,400,700);
+
+body {
+    font-family: ff-clan-web-pro, 'Helvetica Neue', Helvetica, sans-serif;
+    font-weight: 300;
+}
+
+.container {
+    margin: 0 auto;
+    width: 650px;
+}
+
+.header {
+    text-align: center;
+    color: #43494e;
+    font-family: ff-clan-web-pro, 'Helvetica Neue', Helvetica, sans-serif;;
+    font-weight: 300;
+}
+
+.form__input {
+    background: transparent;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 1.4em;
+    height: 40px;
+    padding: 0 10px;
+    width: 500px;
+    outline: none;
+}
+
+.form__button {
+    background: transparent;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.4em;
+    float: right;
+    padding: 0;
+    line-height: 40px;
+    vertical-align: top;
+    width: 115px;
+    outline: none;
+}
+
+.todos-list {
+    font-size: 1.4em;
+}
+
+.todo-item {
+    border-bottom: 2px solid #837c7c;
+    cursor: pointer;
+    line-height: 40px;
+}
+
+.todo-item__delete-button {
+    float: right;
+    text-align: center;
+    width: 40px;
+}
+
+.footer__button {
+    font-family: ff-clan-web-pro, 'Helvetica Neue', Helvetica, sans-serif;
+    background: transparent;
+    border: 2px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.4em;
+    outline: 0;
+    padding: 0 10px;
+    line-height: 40px;
+    vertical-align: top;
+    margin-right: 10px;
+}
+
+.footer__button:hover {
+    box-sizing: border-box;
+    box-shadow: 0 0 2px black;
+}
+
+.delete-completed {
+    float: right;
+    margin-right: 0;
+}
+
+.active {
+    border: 2px solid black;
+    box-sizing: border-box;
+    box-shadow: 0 0 2px black;
+    font-weight: bold;
+}
+
+.disabled{
+    text-decoration: line-through;
+}

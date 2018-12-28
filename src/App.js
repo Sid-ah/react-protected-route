@@ -26,16 +26,14 @@ class App extends React.Component {
   authStateChanged (user) {
     if (user) {
       const {uid} = firebaseAuth ().currentUser;
-      ref.child (`users/${uid}`).once ('value').then (snap => {
-        const userObj = snap.val ();
-        if (!userObj || !userObj.can_refer) {
-          firebaseAuth ().signOut ();
-          this.props.isAuthenticated ({authenticated: false});
-        } else {
-          console.log (`inside here `);
-          this.props.isAuthenticated ({authenticated: true});
-        }
-      });
+      console.log(uid)
+      if (uid) {
+        console.log('about to set isAuthenticated to true')
+        this.props.isAuthenticated ({authenticated: true});
+      } else {
+        firebaseAuth ().signOut ();
+        this.props.isAuthenticated ({authenticated: false});
+     }
     } else {
       firebaseAuth ().signOut ();
       this.props.isAuthenticated ({authenticated: false});
