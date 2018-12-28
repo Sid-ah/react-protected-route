@@ -24,12 +24,14 @@ class Login extends React.Component {
   authStateChanged (user) {
     if (user) {
       const {uid} = firebaseAuth ().currentUser;
+      console.log(uid)
       if (uid) {
+        console.log('about to set isAuthenticated to true')
         this.props.isAuthenticated ({authenticated: true});
       } else {
         firebaseAuth ().signOut ();
         this.props.isAuthenticated ({authenticated: false});
-      }
+     }
     } else {
       firebaseAuth ().signOut ();
       this.props.isAuthenticated ({authenticated: false});
