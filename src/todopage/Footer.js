@@ -2,7 +2,6 @@ import React from 'react';
 const {Button, ButtonDelete} =  require('../utils/helpers');
 
 class Footer extends React.Component {
-  
   isActive = (text) => {
       let filter = this.props.filter === text ? "active" : "";
       return `footer__button ${filter}`

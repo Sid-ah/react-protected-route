@@ -7,7 +7,7 @@ import Title from './todopage/Title';
 import Form from './todopage/Form';
 import Footer from './todopage/Footer';
 import './todopage/styles.css'
-
+import request from 'request';
 
 class Protected extends React.Component {
   constructor(props) {
@@ -40,6 +40,35 @@ class Protected extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.fetchTodos()
+  }
+
+  fetchTodos = () => {
+    const url = "https://sidah.azurewebsites.net/api/TodoRead?code=L3ut8sJs37jFe55PmDhKxSRhXt7Bik1r4c6lZRafMTqT8WoA5EXHrg=="
+    request.get(url, {
+      headers: {
+        'Accept': 'application/json',
+        'Access-Control-Request-Method': "GET",
+        'Access-Control-Request-Headers': "Content-Type",
+        'auth_token': "L3ut8sJs37jFe55PmDhKxSRhXt7Bik1r4c6lZRafMTqT8WoA5EXHrg=="
+      }
+    }, (err, response, body) => {
+      if (err) {
+        console.log('error from making request to API gateway: ' + err)
+      } else {
+        console.log('no error from api gateway request!')
+      }
+      const type = typeof body
+      let bodyToLog = body
+      if (type === 'string') {
+        bodyToLog = JSON.parse(body)
+      }
+      this.setState({todos: bodyToLog})
+      console.log('response body: ', bodyToLog)
+    })
+  }
+
   handleToggle = (id) => {
     this.setState((prevState) => {
       return {
@@ -47,7 +76,7 @@ class Protected extends React.Component {
           if (item.id === id) {
             return {
               ...item,
-              done: !prevState.todos[i].done,
+              isCompleted: !prevState.todos[i].isCompleted,
             }
           }
           return item;
@@ -73,9 +102,9 @@ class Protected extends React.Component {
     let filterState = null;
     switch (filterType) {
       case "Complited":
-        return filterState = this.state.todos.filter(item => item.done);
+        return filterState = this.state.todos.filter(item => item.isCompleted);
       case "Active":
-        return filterState = this.state.todos.filter(item => !item.done);
+        return filterState = this.state.todos.filter(item => !item.isCompleted);
       default:
         return filterState = this.state.todos;
     }
