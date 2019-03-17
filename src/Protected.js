@@ -9,6 +9,7 @@ import Footer from './todopage/Footer';
 import './todopage/styles.css'
 import request from 'request';
 
+const url = "https://sidah.azurewebsites.net/api/TodoRead?code=L3ut8sJs37jFe55PmDhKxSRhXt7Bik1r4c6lZRafMTqT8WoA5EXHrg=="
 class Protected extends React.Component {
   constructor(props) {
     super(props)
@@ -28,11 +29,22 @@ class Protected extends React.Component {
   handleClick = (event) => {
     event.preventDefault();
     if (this.state.todoValue !== "") {
-      const todo = {
-        id: Date.now(),
-        text: this.state.todoValue,
-        done: false,
+      const todo =  {
+          id: Date.now(),
+          task: this.state.todoValue,
+          todo: this.state.todoValue,
+          isCompleted: false,
       }
+      request.post({url: 'https://sidah.azurewebsites.net/api/TodoCreate?code=EQ8YvWnEodLIcnucgta3SoJrGh1sMcmW77ax3Dxp9760IKUU4EFBrw==', 
+        body: todo,
+      }, (err, response, body) => {
+        if (err) {
+          console.log('error from making request to API gateway: ' + err)
+        } else {
+          console.log('no error from api gateway request!')
+        }
+        console.log('response body: ', response)
+      })
       this.setState({
         todoValue: "",
         todos: [todo, ...this.state.todos],
@@ -45,7 +57,6 @@ class Protected extends React.Component {
   }
 
   fetchTodos = () => {
-    const url = "https://sidah.azurewebsites.net/api/TodoRead?code=L3ut8sJs37jFe55PmDhKxSRhXt7Bik1r4c6lZRafMTqT8WoA5EXHrg=="
     request.get(url, {
       headers: {
         'Accept': 'application/json',
